@@ -5,7 +5,6 @@ import { Toast } from "../SweetAlert/Toast";
 const PersonTable = () => {
   const [person, setPerson] = useState("");
   const url = "https://hotel-booking-api-ju41.onrender.com/room";
-  let x = 1;
 
   const Delete = (id) => {
     axios({
@@ -30,6 +29,8 @@ const PersonTable = () => {
     axios
       .get(url)
       .then((user) => {
+        let x = 1;
+
         const persons = user.data.map((props) => {
           return (
             <>
