@@ -58,7 +58,7 @@ const FormBook = () => {
     e.preventDefault();
     const configdata = {
       method: "post",
-      url: "http://localhost:5000/room/reserved/booking",
+      url: "https://hotel-booking-api-ju41.onrender.com/room/reserved/booking",
       data: {
         fullname,
         email,

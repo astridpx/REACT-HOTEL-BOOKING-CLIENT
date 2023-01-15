@@ -22,7 +22,7 @@ function App() {
 
     axios({
       method: "post",
-      url: "http://localhost:5000/admin/token",
+      url: "https://hotel-booking-api-ju41.onrender.com/admin/token",
       data: {
         token,
       },

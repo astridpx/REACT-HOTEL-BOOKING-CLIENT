@@ -4,13 +4,13 @@ import { Toast } from "../SweetAlert/Toast";
 
 const PersonTable = () => {
   const [person, setPerson] = useState("");
-  const url = "http://localhost:5000/room";
+  const url = "https://hotel-booking-api-ju41.onrender.com/room";
   let x = 1;
 
   const Delete = (id) => {
     axios({
       method: "delete",
-      url: `http://localhost:5000/admin/delete/${id}`,
+      url: `https://hotel-booking-api-ju41.onrender.com/admin/delete/${id}`,
     })
       .then((result) =>
         Toast.fire({

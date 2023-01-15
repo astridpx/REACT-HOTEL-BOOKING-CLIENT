@@ -58,7 +58,7 @@ const Navbar = ({ isLoginRef }) => {
 
         axios({
           method: "post",
-          url: "http://localhost:5000/admin/",
+          url: "https://hotel-booking-api-ju41.onrender.com/admin/",
           data: {
             email: result.data.email,
           },
