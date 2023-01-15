@@ -5,6 +5,7 @@ import { Toast } from "../SweetAlert/Toast";
 const PersonTable = () => {
   const [person, setPerson] = useState("");
   const url = "http://localhost:5000/room";
+  let x = 1;
 
   const Delete = (id) => {
     axios({
@@ -34,7 +35,7 @@ const PersonTable = () => {
             <>
               <tr key={props._id}>
                 <td className="px-6 py-4 text-sm font-medium text-gray-800 whitespace-nowrap">
-                  1
+                  {x++}
                 </td>
                 <td className="px-6 py-4 text-sm text-gray-800 whitespace-nowrap">
                   {props.fullname}
