@@ -3,8 +3,8 @@ import { Link, useNavigate } from "react-router-dom";
 import { RxHamburgerMenu } from "react-icons/rx";
 import { GrClose, GrLogout } from "react-icons/gr";
 // import Logo from "../assets/hotel-logo.png";
-import { GoogleLogin, googleLogout } from "@react-oauth/google";
-import jwt_decode from "jwt-decode";
+// import { GoogleLogin, googleLogout } from "@react-oauth/google";
+// import jwt_decode from "jwt-decode";
 import { useGoogleLogin } from "@react-oauth/google";
 import axios from "axios";
 
@@ -20,10 +20,9 @@ import {
 const Navbar = ({ isLoginRef }) => {
   const [open, setOpen] = useState(false);
   const dispatch = useDispatch();
-  const name = useSelector((state) => state.account.accName);
+  // const name = useSelector((state) => state.account.accName);
   const { isLogin } = useSelector((state) => state.account);
   const navigate = useNavigate();
-  const loginRef = useRef(null);
 
   // ROOMS
   const room = document.getElementById("room");
@@ -76,29 +75,6 @@ const Navbar = ({ isLoginRef }) => {
       }
     },
   });
-
-  const HandleLogin = (data) => {
-    const decoded = jwt_decode(data.credential);
-
-    dispatch(updateName({ accName: decoded.name }));
-    dispatch(updateEmail({ email: decoded.email }));
-    dispatch(updateIsLogin({ isLogin: true }));
-
-    axios({
-      method: "post",
-      url: "https://hotel-booking-api-ju41.onrender.com/admin/",
-      data: {
-        email: decoded.email,
-      },
-    })
-      .then((result) => {
-        console.log(result);
-        localStorage.setItem("tokens", result.data.token);
-        localStorage.setItem("user", result.data.user);
-        navigate("/admin/homepage");
-      })
-      .catch((err) => console.error(err));
-  };
 
   return (
     <>
@@ -164,14 +140,6 @@ const Navbar = ({ isLoginRef }) => {
             </button>
           )}
           {/* <div className="hidden">
-            <GoogleLogin
-              onSuccess={(credentialResponse) =>
-                HandleLogin(credentialResponse)
-              }
-              onError={() => {
-                console.log("Login Failed");
-              }}
-            />
             <GoogleLogin
               onSuccess={(credentialResponse) => {
                 console.log(credentialResponse);

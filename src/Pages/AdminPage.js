@@ -8,8 +8,8 @@ const AdminPage = () => {
 
   const Logout = () => {
     localStorage.clear();
-    window.location.reload();
     navigate("/");
+    window.location.reload(false);
   };
 
   return (
