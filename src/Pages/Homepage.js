@@ -103,7 +103,7 @@ const Homepage = () => {
               <span className="text-base font-semibold ">
                 / {monthNames[checkIn.getMonth()]}
                 <MdExpandMore
-                  className="absolute -right-1 bottom-0 font-semibold text-2xl cursor-pointer md:right-0 "
+                  className="absolute hidden -right-1 bottom-0 font-semibold text-2xl cursor-pointer md:right-0 lg:block "
                   onClick={() => setCalendar(!calendar)}
                 />
               </span>
@@ -130,7 +130,7 @@ const Homepage = () => {
               <span className="text-base font-semibold">
                 / {monthNames[checkOut.getMonth()]}
                 <MdExpandMore
-                  className="absolute -right-1  bottom-0 font-semibold text-2xl cursor-pointer  md:right-0"
+                  className="absolute hidden -right-1  bottom-0 font-semibold text-2xl cursor-pointer  md:right-0  lg:block"
                   onClick={() => setCalendars(!calendars)}
                 />
               </span>
@@ -155,11 +155,11 @@ const Homepage = () => {
             <h1 className="text-2xl font-bold md:text-3xl ">
               {guess <= 0 ? setGuess(1) : guess <= 9 ? "0" + guess : guess}
               <MdExpandLess
-                className="absolute right-[20px] bottom-5 font-semibold text-2xl cursor-pointer"
+                className="absolute hidden right-[20px] bottom-5 font-semibold text-2xl cursor-pointer  lg:block"
                 onClick={() => setGuess(guess + 1)}
               />
               <MdExpandMore
-                className="absolute right-[20px] bottom-0 font-semibold text-2xl cursor-pointer"
+                className="absolute hidden right-[20px] bottom-0 font-semibold text-2xl cursor-pointer  lg:block"
                 onClick={() => setGuess(guess - 1)}
               />
             </h1>

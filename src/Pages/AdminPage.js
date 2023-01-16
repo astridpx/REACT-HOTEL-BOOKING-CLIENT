@@ -9,6 +9,7 @@ const AdminPage = () => {
   const Logout = () => {
     localStorage.clear();
     window.location.reload();
+    navigate("/");
   };
 
   return (

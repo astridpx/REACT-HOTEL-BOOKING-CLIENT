@@ -27,13 +27,13 @@ const SwiperReview = () => {
         pagination={{
           clickable: true,
         }}
-        navigation={true}
+        navigation={width < 1024 ? false : true}
         modules={[Pagination, Navigation]}
         className="mySwiper "
       >
         {Reviews.map((props) => {
           return (
-            <SwiperSlide className="py-6 pl-20 pr-8 relative " key={props.id}>
+            <SwiperSlide className="py-6 px-2  relative " key={props.id}>
               <header className="mb-7">
                 <div className=" flex ">
                   <img src={Profile} alt="" className="h-10  " />
@@ -50,11 +50,11 @@ const SwiperReview = () => {
                 </div>
               </header>
 
-              <h1 className="text-base text-gray-600 font-semibold mb-2 ">
+              <h1 className="text-base pl-6 text-gray-600 font-semibold mb-2 ">
                 {props.title}
               </h1>
-              <ImQuotesLeft className="absolute left-12" />
-              <p className="text-gray-600 max-h-40 text-ellipsis line-clamp-4 break-words  text-sm mb-6 ">
+              <ImQuotesLeft className="absolute left-0" />
+              <p className="text-gray-600 max-h-40 pl-6 text-ellipsis line-clamp-4 break-words  text-sm mb-6 ">
                 {props.review}
               </p>
             </SwiperSlide>
