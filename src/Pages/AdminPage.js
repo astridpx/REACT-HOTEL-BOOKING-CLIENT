@@ -6,18 +6,6 @@ import PersonTable from "../components/Person Table/PersonTable";
 const AdminPage = () => {
   const navigate = useNavigate();
 
-  // fix the page if reload give not found
-  useEffect(() => {
-    window.onbeforeunload = function () {
-      return true;
-    };
-
-    return () => {
-      navigate("/admin/homepage");
-      // window.onbeforeunload = ;
-    };
-  }, []);
-
   const Logout = () => {
     localStorage.clear();
     navigate("/");
