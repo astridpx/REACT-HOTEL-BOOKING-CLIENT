@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
 import Image from "../../assets/rooms/luxury.jpg";
 import Images from "../../assets/rooms/family.jpg";
 import { HotelDetailsData } from "../../Helpers/Hotel-details-data/HotelDetails.data";
@@ -11,12 +12,11 @@ import { MdBed } from "react-icons/md";
 import { TbBed } from "react-icons/tb";
 
 import { useSelector, useDispatch } from "react-redux";
-import { showRoomDetails } from "../../Redux/Slice/Roomdetails.slice";
 
 const Roomdetails = () => {
   const roomId = useSelector((state) => state.roomDetails.roomId);
-  const dispatch = useDispatch();
   const [room, setRoom] = useState("");
+  const navigate = useNavigate();
 
   useEffect(() => {
     const rooms = HotelDetailsData.filter((filter) => filter.id === roomId).map(
@@ -121,7 +121,7 @@ const Roomdetails = () => {
         <IoCloseCircle
           className="fixed top-2 right-4 cursor-pointer text-red-600 text-2xl bg-white rounded-full shadow-xl"
           onClick={() => {
-            dispatch(showRoomDetails({ show: false }));
+            navigate("/");
             window.scroll(0, 1000);
           }}
           // onClick={HandleClick}

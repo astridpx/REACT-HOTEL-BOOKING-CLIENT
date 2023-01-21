@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
 import { FaPaperPlane, FaMapMarkerAlt, FaPhoneAlt } from "react-icons/fa";
 import { IoMdMail } from "react-icons/io";
 import { AiOutlineArrowLeft } from "react-icons/ai";
@@ -14,7 +15,7 @@ const FormBook = () => {
   const Guess = useSelector((state) => state.account.guess);
   const [dateIn, setDateIn] = useState("text");
   const [dateOut, setDateOut] = useState("text");
-  const dispatch = useDispatch();
+  const navigate = useNavigate();
 
   const [fullname, setFullname] = useState("");
   const [dateCheckIn, setdateCheckIn] = useState(new Date());
@@ -24,7 +25,7 @@ const FormBook = () => {
   const { email } = useSelector((state) => state.account);
 
   const HideFormBook = () => {
-    dispatch(updateFormBook({ formBook: false }));
+    navigate("/");
   };
 
   useEffect(() => {

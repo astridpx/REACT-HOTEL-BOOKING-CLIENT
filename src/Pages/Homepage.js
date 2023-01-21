@@ -1,4 +1,5 @@
 import React, { useEffect, useRef, useState } from "react";
+import { useNavigate } from "react-router-dom";
 import Navbar from "../components/Navbar";
 import HotelRoom from "../components/Hotel.Room";
 import HotelServices from "../components/Hotel.Services";
@@ -31,6 +32,7 @@ const Homepage = () => {
   const [calendars, setCalendars] = useState(false);
   const dispatch = useDispatch();
   const loginRef = useRef();
+  const navigate = useNavigate();
 
   const ShowMenuNavbar = useSelector((state) => state.roomDetails.navbar);
   const { isLogin } = useSelector((state) => state.account);
@@ -168,9 +170,7 @@ const Homepage = () => {
           <div
             className="font-bold bg-green-500 py-3 cursor-pointer rounded-md  hover:bg-green-600"
             onClick={() => {
-              isLogin
-                ? dispatch(updateFormBook({ formBook: true }))
-                : loginRef.current.click();
+              isLogin ? navigate("/book/form") : loginRef.current.click();
             }}
           >
             BOOK Now

@@ -1,4 +1,5 @@
 import React, { useRef, useState } from "react";
+import { useNavigate } from "react-router-dom";
 import { BsFillEyeFill } from "react-icons/bs";
 // import Roomdetails from "./Room-Info/Room.details";
 
@@ -11,18 +12,16 @@ import Minimal from "../assets/rooms/minimal.jpg";
 
 // REDUX
 import { useSelector, useDispatch } from "react-redux";
-import {
-  showRoomDetails,
-  updateRoomId,
-} from "../Redux/Slice/Roomdetails.slice";
+import { updateRoomId } from "../Redux/Slice/Roomdetails.slice";
 
 const HotelRoom = () => {
   // const showRoomDetail = useSelector((state) => state.roomDetails.show);
   const dispatch = useDispatch();
+  const navigate = useNavigate();
 
   const ShowRoomDetail = (id) => {
     dispatch(updateRoomId({ roomId: id }));
-    dispatch(showRoomDetails({ show: true }));
+    navigate("/room/details");
     window.scroll(0, 0);
   };
 

@@ -11,17 +11,13 @@ import axios from "axios";
 // REDUX
 import { useDispatch, useSelector } from "react-redux";
 import { showMenuNavbar } from "../Redux/Slice/Roomdetails.slice";
-import {
-  updateEmail,
-  updateIsLogin,
-  updateName,
-} from "../Redux/Slice/account.slice";
+import { updateName } from "../Redux/Slice/account.slice";
 
 const Navbar = ({ isLoginRef }) => {
   const [open, setOpen] = useState(false);
   const dispatch = useDispatch();
-  // const name = useSelector((state) => state.account.accName);
   const { isLogin } = useSelector((state) => state.account);
+  // const name = useSelector((state) => state.account.accName);
   const navigate = useNavigate();
 
   // ROOMS
@@ -39,6 +35,11 @@ const Navbar = ({ isLoginRef }) => {
     setOpen(false);
   };
 
+  const HandleLogout = () => {
+    localStorage.clear();
+    window.location.reload(false);
+  };
+
   // GOOOGLE LOGIN
   const Login = useGoogleLogin({
     onSuccess: async (tokenResponse) => {
@@ -53,21 +54,36 @@ const Navbar = ({ isLoginRef }) => {
         );
         console.log(result.data);
         dispatch(updateName({ accName: result.data.name }));
-        dispatch(updateEmail({ email: result.data.email }));
-        dispatch(updateIsLogin({ isLogin: true }));
 
         axios({
           method: "post",
           url: "https://hotel-booking-api-ju41.onrender.com/admin/",
+          // url: "http://localhost:5000/admin/",
+
           data: {
             email: result.data.email,
           },
         })
-          .then((result) => {
-            console.log(result);
-            localStorage.setItem("tokens", result.data.token);
-            localStorage.setItem("user", result.data.user);
-            navigate("/admin/homepage");
+          .then((results) => {
+            if (results.data.isAdmin) {
+              // localStorage.setItem("tokens", results.data.token);
+              // localStorage.setItem("user", results.data.user);
+              localStorage.setItem(
+                "admin",
+                JSON.stringify({
+                  email: results.data.email,
+                  token: results.data.token,
+                  isLogin: true,
+                })
+              );
+              navigate("/admin/homepage");
+            } else {
+              localStorage.setItem(
+                "user",
+                JSON.stringify({ email: result.data.email, isLogin: true })
+              );
+              window.location.reload(false);
+            }
           })
           .catch((err) => console.error(err));
       } catch (error) {
@@ -113,7 +129,7 @@ const Navbar = ({ isLoginRef }) => {
               Special Offers
             </Link>
           </li>
-          {localStorage.getItem("tokens") ? (
+          {localStorage.getItem("admin") ? (
             <button
               type="button"
               className="ml-12 px-7 py-2 font-semibold rounded border border-gray-400 hover:bg-emerald-50 cursor-pointer"
@@ -125,7 +141,7 @@ const Navbar = ({ isLoginRef }) => {
             <button
               type="button"
               className="ml-12 px-7 py-2 font-semibold rounded border border-gray-400 hover:bg-emerald-50 cursor-pointer"
-              onClick={() => window.location.reload()}
+              onClick={HandleLogout}
             >
               Logout
             </button>
